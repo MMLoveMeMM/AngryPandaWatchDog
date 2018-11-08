@@ -1,0 +1,1 @@
+查看android源码的watchdog.java,实现监听消息阻塞和共享资源被锁
