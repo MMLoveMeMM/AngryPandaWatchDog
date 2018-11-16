@@ -1,5 +1,7 @@
 package cn.pumpkin.angrypandawatchdog.dog;
 
+import android.os.SystemClock;
+
 import cn.pumpkin.angrypandawatchdog.base.ThreadBase;
 import cn.pumpkin.angrypandawatchdog.share.ShareObjectInstance;
 
@@ -32,8 +34,8 @@ public class WatchDog extends Thread implements IDog {
             public void run() {
 
                 while (true) {
-                    startTime = System.currentTimeMillis();
-                    endTime = System.currentTimeMillis();
+                    startTime = SystemClock.uptimeMillis();
+                    endTime = SystemClock.uptimeMillis();
                     checkTimeout = false;
                     ShareObjectInstance.getInstance().lookWork("watch dog",10);
                     try {
@@ -54,15 +56,15 @@ public class WatchDog extends Thread implements IDog {
         while (true) {
             if (endTime - startTime > ACCESS_RES_TIMEOUT && !checkTimeout) {
                 android.util.Log.e("ShareObjectInstance", "timeout ----------------------");
-                startTime = System.currentTimeMillis();
-                endTime = System.currentTimeMillis();
+                startTime = SystemClock.uptimeMillis();
+                endTime = SystemClock.uptimeMillis();
             }
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            endTime = System.currentTimeMillis();
+            endTime = SystemClock.uptimeMillis();
         }
 
     }
